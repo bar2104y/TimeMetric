@@ -13,6 +13,11 @@ TimeMetric::~TimeMetric()
 {
 }
 
+std::string TimeMetric::get_name()
+{
+    return name;
+}
+
 
 void TimeMetric::set_name(std::string n)
 {

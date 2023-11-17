@@ -22,6 +22,7 @@ public:
     ~TimeMetric();
 
     void set_name(std::string n);
+    std::string get_name();
     void start();                       // start measuring
     void stop();                        // end measuring
     void add_with_during(float t);      // add another measuring
