@@ -19,15 +19,16 @@ void TimeMetric::set_name(std::string n)
     name = n;
 }
 
-void TimeMetric::start(float t)
+void TimeMetric::start()
 {
-    t_start = t;
+    t_start = std::chrono::high_resolution_clock::now();
 }
 
-void TimeMetric::stop(float t)
+void TimeMetric::stop()
 {
-    t_stop = t;
-    t_all += t_stop - t_start;
+    t_stop = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<float> time_span  = std::chrono::duration_cast<std::chrono::duration<float>>(t_stop-t_start);
+    t_all += time_span.count();
     count += 1.0f;
 }
 
@@ -40,8 +41,7 @@ void TimeMetric::reset()
 {
     count = 0.0f;
     t_all = 0.0f;
-    t_start = 0.0f;
-    t_stop = 0.0f;
+    t_start = t_stop = std::chrono::high_resolution_clock::now();
 }
 
 void TimeMetric::print(){

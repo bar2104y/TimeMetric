@@ -1,16 +1,19 @@
 #ifndef TIMEMETRIC_H
 #define TIMEMETRIC_H
+
+
 #include <iostream>
+#include <chrono>
 
 class TimeMetric
 {
 private:
-    float t_start,              // Время начала последнего события
-            t_stop,             // Время конца последнего события
-            t_all,              // Среднее время
-            count;              // Количество вызовов
+    std::chrono::high_resolution_clock::time_point t_start, // time of start
+                                                    t_stop; // time of end
+    float t_all,                                            // total time
+            count;                                          // nums of calls
     
-    std::string name;           // Имя экземпляра
+    std::string name;                                       // name of timer
             
 
 public:
@@ -19,15 +22,14 @@ public:
     ~TimeMetric();
 
     void set_name(std::string n);
-    void start(float t);        // Записать время начала действия
-    void stop(float t);         // Записать время конца действия
-    void add_with_during(float t);
-    void reset();
+    void start();                       // start measuring
+    void stop();                        // end measuring
+    void add_with_during(float t);      // add another measuring
+    void reset();                       // reset stats
 
+    void print();                       // print stats
 
-    void print();
-
-    float mean();               // Среднее время выполнения действия    
+    float mean();                       // get mean time    
 
 };
 
